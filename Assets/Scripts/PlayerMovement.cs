@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     // Fixed update is called in sync with physics
     private void FixedUpdate()
     {
+        //TO DO Fix issue with click  to move  and  move and WSDA  
+
         if (Input.GetMouseButton(0))
         {
             print("Cursor raycast hit: " + cameraRaycaster.layerHit);
