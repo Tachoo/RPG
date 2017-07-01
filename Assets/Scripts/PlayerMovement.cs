@@ -10,8 +10,10 @@ public class PlayerMovement : MonoBehaviour
     ThirdPersonCharacter m_Character;   
     CameraRaycaster cameraRaycaster;
     Vector3 currentClickTarget;
-    //magnitude to move 
+
+    [SerializeField] bool IsInDirecMode = false; //TO DO consider making a static later
     [SerializeField] float walkStopRadius = 0.2f;
+
     private void Start()
     {
         cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
@@ -22,11 +24,41 @@ public class PlayerMovement : MonoBehaviour
     // Fixed update is called in sync with physics
     private void FixedUpdate()
     {
-        //TO DO Fix issue with click  to move  and  move and WSDA  
-
-        if (Input.GetMouseButton(0))
+        if (Input.GetKeyDown(KeyCode.G))
         {
-            print("Cursor raycast hit: " + cameraRaycaster.layerHit);
+            IsInDirecMode = !IsInDirecMode;
+        }
+        if (IsInDirecMode)
+        {
+            //Gamepad
+            ProcessInDirecMovement();
+        }
+        else
+        {
+            ProcessInDirecMovementClick();//Mouse movement
+        }
+    }
+    private void ProcessInDirecMovement()
+    {
+        //
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
+        
+        //calculate camera relative dir
+       Vector3 m_camforward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
+       Vector3 m_move = v * m_camforward + h * Camera.main.transform.right;
+
+        //
+        m_Character.Move(m_move, false, false);
+
+
+
+    }
+    private void ProcessInDirecMovementClick()
+    {
+        if (Input.GetMouseButton(1))
+        {
+           
             switch (cameraRaycaster.layerHit)
             {
                 case Layer.Walkable:
@@ -41,9 +73,9 @@ public class PlayerMovement : MonoBehaviour
                     print("Shouldn't Be here");
                     break;
             }
-             
+
         }
-        var playerToClickPoint = currentClickTarget -transform.position ;
+        var playerToClickPoint = currentClickTarget - transform.position;
         if (playerToClickPoint.magnitude >= walkStopRadius)
         {
             m_Character.Move(currentClickTarget - transform.position, false, false);

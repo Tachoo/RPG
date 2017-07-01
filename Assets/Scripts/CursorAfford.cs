@@ -18,7 +18,7 @@ public class CursorAfford : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update ()
+	void LateUpdate ()
     {
         switch (cameraRayCaster.layerHit)
         {

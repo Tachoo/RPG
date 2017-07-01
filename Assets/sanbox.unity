@@ -207,9 +207,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 18073773}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7b76eb186005c34eb1c35a5581d0189, type: 3}
+  m_Script: {fileID: 11500000, guid: 74136ccb98d6b234bb89b79c76a9c448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WalkCursor: {fileID: 2800000, guid: 378a19a66bcc95d44b54d2db0c4f6934, type: 3}
+  EnemyCursor: {fileID: 2800000, guid: 3bcaff70a793519419a81009a436ae7c, type: 3}
+  StopCursor: {fileID: 2800000, guid: 0c19efe308f439d43967ef8cb6691fcc, type: 3}
+  cursorhospot: {x: 96, y: 96}
 --- !u!114 &18073780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -548,6 +552,10 @@ Prefab:
     - target: {fileID: 149790, guid: 7737647c22c1fc64a88d5cd030c352ce, type: 2}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 11444856, guid: 7737647c22c1fc64a88d5cd030c352ce, type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7737647c22c1fc64a88d5cd030c352ce, type: 2}
