@@ -22,6 +22,16 @@ public class CameraRaycaster : MonoBehaviour
         get { return m_layerHit; }
     }
 
+
+    public delegate void OnLayerChange();
+    public OnLayerChange layerchangeobservers;
+
+    void SomeLayerchangeHandler()
+    {
+
+    }
+
+
     void Start() // TODO Awake?
     {
         viewCamera = Camera.main;
