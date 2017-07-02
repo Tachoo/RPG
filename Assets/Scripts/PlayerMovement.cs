@@ -18,13 +18,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float AttackStopRadius = 5f;
     #endregion
     #endregion
+
     private void Start()
     {
         cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
         m_Character = GetComponent<ThirdPersonCharacter>();
         CurrentDestination = transform.position;
     }
-
     // Fixed update is called in sync with physics
     private void FixedUpdate()
     {
@@ -104,8 +104,6 @@ public class PlayerMovement : MonoBehaviour
         return destination - reductionVector;
     }
     #endregion
-
-
     #region Gizmos
     private void OnDrawGizmos()
     {
