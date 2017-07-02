@@ -9,7 +9,7 @@ public class SomeObserver : MonoBehaviour {
     void Start ()
     {
         CameraRayCasT = GetComponent<CameraRaycaster>(); 
-        CameraRayCasT.OnlayerChange += Some;       
+        //CameraRayCasT.OnlayerChange += Some;       
     }
 	
 	void Update ()

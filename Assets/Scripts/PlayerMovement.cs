@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            ProcessInDirecMovementClick();//Mouse movement
+           // ProcessInDirecMovementClick();//Mouse movement
         }
     }
     #region GamePad Key&Mouse
@@ -60,29 +60,29 @@ public class PlayerMovement : MonoBehaviour
 
 
     }
-    private void ProcessInDirecMovementClick()
-    {
-        if (Input.GetMouseButton(1))
-        {
-            Clickpoint = cameraRaycaster.hit.point;
-            switch (cameraRaycaster.layerHit)
-            {
-                case Layer.Walkable:
-                    CurrentDestination = ShortDestination(Clickpoint, walkStopRadius);
-                    break;
+    //private void ProcessInDirecMovementClick()
+    //{
+    //    if (Input.GetMouseButton(1))
+    //    {
+    //        Clickpoint = cameraRaycaster.hit.point;
+    //        switch (cameraRaycaster.layerHit)
+    //        {
+    //            case Layer.Walkable:
+    //                CurrentDestination = ShortDestination(Clickpoint, walkStopRadius);
+    //                break;
 
-                case Layer.Enemy:
-                    CurrentDestination = ShortDestination(Clickpoint, AttackStopRadius);
-                    break;
+    //            case Layer.Enemy:
+    //                CurrentDestination = ShortDestination(Clickpoint, AttackStopRadius);
+    //                break;
 
-                default:
-                    print("Shouldn't Be here");
-                    break;
-            }
+    //            default:
+    //                print("Shouldn't Be here");
+    //                break;
+    //        }
 
-        }
-        WalktoDestination();
-    }
+    //    }
+    //    WalktoDestination();
+    //}
 
     private void WalktoDestination()
     {

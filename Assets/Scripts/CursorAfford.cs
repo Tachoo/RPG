@@ -10,31 +10,34 @@ public class CursorAfford : MonoBehaviour {
     [SerializeField] Texture2D StopCursor = null;
 
     [SerializeField] Vector2 cursorhospot = new Vector2(96, 96);
+    [SerializeField] const int  WalkLayerNumber = 8;
+    [SerializeField] const int EnemyLayerNumber = 9;
+   
+
+
     #endregion
     // Use this for initialization
     void Start()
     {
         cameraRayCaster = GetComponent<CameraRaycaster>();
-        cameraRayCaster.OnlayerChange += OnLayerChanged;
+        cameraRayCaster.notifyLayerChangeObservers += OnLayerChanged;
     }
 	
 	
-	void OnLayerChanged(Layer newlayer)  //Only call  when layer changes
+	void OnLayerChanged(int newlayer)  //Only call  when layer changes
     {
         print("Cursor Hit Over NewLayer");
         switch (newlayer)
         {
-            case Layer.Walkable:
+            case WalkLayerNumber:
                 Cursor.SetCursor(WalkCursor, cursorhospot, CursorMode.Auto);
                 break;
-            case Layer.Enemy:
+            case EnemyLayerNumber:
                 Cursor.SetCursor(EnemyCursor, cursorhospot, CursorMode.Auto);
                 break;
-            case Layer.RaycastEndStop:
-                Cursor.SetCursor(StopCursor, cursorhospot, CursorMode.Auto);
-                break;
+            
             default:
-                Debug.Log("unknow Cursor to display");
+                Cursor.SetCursor(StopCursor, cursorhospot, CursorMode.Auto);
                 break;
         }
     }

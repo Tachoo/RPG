@@ -1,11 +1,9 @@
 fileFormatVersion: 2
-guid: 75a43cca039264395b99698681e52275
-labels:
-- Ray
-- SceneSetup
-timeCreated: 1485198734
+guid: bd7fa1e87ac30ef4fb1b306ff3e6d7c0
+timeCreated: 1499014650
 licenseType: Free
 NativeFormatImporter:
+  mainObjectFileID: 100100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
