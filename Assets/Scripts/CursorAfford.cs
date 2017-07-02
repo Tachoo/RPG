@@ -12,15 +12,17 @@ public class CursorAfford : MonoBehaviour {
     [SerializeField] Vector2 cursorhospot = new Vector2(96, 96);
     #endregion
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         cameraRayCaster = GetComponent<CameraRaycaster>();
+        cameraRayCaster.OnlayerChange += OnLayerChanged;
     }
 	
-	// Update is called once per frame
-	void LateUpdate ()
+	
+	void OnLayerChanged(Layer newlayer)  //Only call  when layer changes
     {
-        switch (cameraRayCaster.layerHit)
+        print("Cursor Hit Over NewLayer");
+        switch (newlayer)
         {
             case Layer.Walkable:
                 Cursor.SetCursor(WalkCursor, cursorhospot, CursorMode.Auto);

@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 18073774}
   - component: {fileID: 18073780}
   - component: {fileID: 18073779}
+  - component: {fileID: 18073781}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -226,6 +227,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   layerPriorities: 0900000008000000
+--- !u!114 &18073781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 18073773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44e76661ee569044197eec546c392a09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &323199723
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,6 +568,11 @@ Prefab:
     - target: {fileID: 11444856, guid: 7737647c22c1fc64a88d5cd030c352ce, type: 2}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114620980630649672, guid: 7737647c22c1fc64a88d5cd030c352ce,
+        type: 2}
+      propertyPath: walkStopRadius
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7737647c22c1fc64a88d5cd030c352ce, type: 2}
