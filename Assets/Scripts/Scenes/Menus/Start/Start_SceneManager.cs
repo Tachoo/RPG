@@ -59,19 +59,8 @@ public class Start_SceneManager : MonoBehaviour
 
          SceneManager.LoadScene(1);// Creacion de nueva partida
     }
-    public void RegisterAccount()/*Mandarlo A la scenea de NewGame*/
-    {
-        Debug.Log("Register");
-
-         SceneManager.LoadScene(2);// Creacion de nueva partida
-    }
-
-    public void Exit()/* Salir*/
-    {
-        Debug.Log("Exit");
-
-        Application.Quit();
-    }
+   
+   
 
     #endregion
 }
