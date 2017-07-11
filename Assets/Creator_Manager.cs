@@ -96,12 +96,17 @@ public class Creator_Manager : MonoBehaviour {
     }
     #endregion
     #region GetCharacterClassSkills
-    WWWForm form = new WWWForm();
-    //form.AddField("name", );
-    //form.AddField("class", );
-    //form.AddField("sexo",);
-    //form.AddField("season",)
-    WWW itemsData = new WWW("http://www.tachoo.xyz/APIDB/GetCaharacterInfo.php", form);
+    IEnumerable GetCharacterClassSkills()
+    {
+        WWWForm form = new WWWForm();
+        //form.AddField("name", );
+        //form.AddField("class", );
+        //form.AddField("sexo",);
+        //form.AddField("season",)
+        WWW itemsData = new WWW("http://www.tachoo.xyz/APIDB/GetClassSkills.php", form);
+
+        yield return itemsData;
+    }
     #endregion
     #endregion
 
