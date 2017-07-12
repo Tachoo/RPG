@@ -9,6 +9,10 @@ public class Creator_Manager : MonoBehaviour {
     private bool NeedUpdate=false;
     public Text HeaderClass;
     public int Genero;
+    public int extremo;
+    public int temporada;
+    public InputField CharacterName;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -32,26 +36,34 @@ public class Creator_Manager : MonoBehaviour {
     //Caballero
     public void ClassCaballero()
     {
-        CharacterClass = "Caballero";
+        CharacterClass = "caballero";
         NeedUpdate = true;
+        //Cuando se presiona el boton de las classes deberemos de cambiar el contenido de los layers derechos
+        StartCoroutine(GetCharacterClassSkills( CharacterClass));
     }
     //Arquero
     public void ClassArquero()
     {
-        CharacterClass = "Arquero";
+        CharacterClass = "arquero";
         NeedUpdate = true;
+        //
+        StartCoroutine(GetCharacterClassSkills(CharacterClass));
     }
     //Hechicero
     public void ClassHechicero()
     {
-        CharacterClass = "Hechicero";
+        CharacterClass = "hechicero";
         NeedUpdate = true;
+        //
+        StartCoroutine(GetCharacterClassSkills(CharacterClass));
     }
     //Monje
     public void ClassMonje()
     {
-        CharacterClass = "Monje";
+        CharacterClass = "monje";
         NeedUpdate = true;
+        //
+        StartCoroutine(GetCharacterClassSkills(CharacterClass));
     }
     #endregion
 
@@ -71,38 +83,50 @@ public class Creator_Manager : MonoBehaviour {
     //Hombre
     public void Extremo()
     {
-        Genero = 1; //--> Hombre es 1
+        extremo = 1;
+        temporada = 0;
     }
     //Mujer
     public void Temporada()
     {
-        Genero = 2; //--> Mujer es 2 
+        extremo = 0;
+        temporada = 1;
     }
     #endregion
 
     #endregion
 
     #region SendInfo
-    IEnumerable CreateCharacter()
+    public void SendInfo()
     {
+        StartCoroutine(CreateCharacter());
+    }
+    IEnumerator CreateCharacter()
+    {
+       
         WWWForm form = new WWWForm();
-        //form.AddField("name", );
-        //form.AddField("class", );
-        //form.AddField("sexo",);
-        //form.AddField("season",)
+        form.AddField("name",CharacterName.text);
+        form.AddField("class",CharacterClass );
+        form.AddField("sexo",Genero);
+        if (extremo == 0 && temporada == 1)
+        {
+            form.AddField("season", temporada);
+        }
+        else if(temporada == 0 && extremo == 1)
+        {
+            form.AddField("season", extremo);
+        }
+        
         WWW itemsData = new WWW("http://www.tachoo.xyz/APIDB/GetCaharacterInfo.php", form);
 
         yield return itemsData;
     }
     #endregion
     #region GetCharacterClassSkills
-    IEnumerable GetCharacterClassSkills()
+    IEnumerator GetCharacterClassSkills(string _classname)
     {
         WWWForm form = new WWWForm();
-        //form.AddField("name", );
-        //form.AddField("class", );
-        //form.AddField("sexo",);
-        //form.AddField("season",)
+        form.AddField("classname",_classname);
         WWW itemsData = new WWW("http://www.tachoo.xyz/APIDB/GetClassSkills.php", form);
 
         yield return itemsData;
