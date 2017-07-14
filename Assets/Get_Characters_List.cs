@@ -16,6 +16,13 @@ public class Get_Characters_List : MonoBehaviour {
 		
 	}
 
+    public void SelectCharacter()
+    {
+        /*Funcion encargada de  selecionar el character id  de la lista de character info*/
+
+    }
+
+
     IEnumerator CharactersInfo()
     {
 

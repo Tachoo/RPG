@@ -40,6 +40,9 @@ public class Singleton_Account : MonoBehaviour
     public string AC_Server { get; set; }
     #endregion
 
+    #region Guardar los datos del campeon seleccionado
+    #endregion
+
 
 
 
