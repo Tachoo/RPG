@@ -82,51 +82,30 @@ public class LogIn_SceneManager : MonoBehaviour
             Messagebox.SetActive(true);
         }
 
-
         
-        //cuenta regresiva de 3 segundos 
-        //loadscene(2);
-        /*Antes de ir a otra scena  debermos de confirmar si el usuario tiene  personajes creados o no*/
-
-        // Si tiene personajes creados || Ir al Main Menu del juego o creador de partidas
-
-        //si no tiene personajes creados || Ir al creador de personajes a crear uno 
-
-
     }
     #endregion
     #region Enumerator para innerjoin characters
     IEnumerator CharacteRecive()
     {
-       
-        WWWForm form = new WWWForm();
+          WWWForm form = new WWWForm();
         form.AddField("id", Singleton_Account.instance.AC_ID);
-        
-
-        WWW itemsData = new WWW("http://www.tachoo.xyz/APIDB/GetCharacter.php", form);
-
+        WWW itemsData = new WWW("http://www.tachoo.xyz/APIDB/GetCharactersInfo.php", form);
+        //Esperamos la respuesta de el servidor  y de la base de datos
         yield return itemsData;
-
-        string itemsDataString = itemsData.text;
-        print(itemsDataString);
-
-        if (itemsDataString.Contains(";"))
+        //Debemos de asegurarnos que no sea vacio el string;
+        if (itemsData.text.Length != 0)
         {
-            Character = itemsDataString.Split(';');
-        }
-
-        if (Character.Length > 0)
-        {
-            //Suponemos que el usuario tiene por lo menos 1 personaje creado debemos de mandarlo al menu principal
+            //Simple si tiene datos pues lo mandamos a la scena de selecionar el character
             StartCoroutine(loadscene(3));
-
         }
-        else if (Character.Length < 0){}
         else
         {
-            //Sabemos que el usurio no tiene personaje creado  entonces debemos de mandarlo al creador de personajes
-            StartCoroutine(loadscene(2));
+            //Como no recivimos nada  entonces asumimos que no tiene ningun personaje creado.
+           StartCoroutine(loadscene(2)); //Lo mandamos al creador de personajes
         }
+        
+        
 
 
     }
@@ -256,7 +235,7 @@ public class LogIn_SceneManager : MonoBehaviour
         if (items.Length>4)//Asumimos que el valor devuelto por la base de datos fue exitosa
         {
             //Hacemoa que el display del texto y demas
-            showmessage.text ="Welcome Back Master."+(string)items[2];
+            showmessage.text ="Good to See You Back my Master."+(string)items[2];
 
             Messagebox.SetActive(true);
 
