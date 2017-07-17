@@ -22,7 +22,9 @@ public class Chatsystem : MonoBehaviour {
     #region DisplayChatRegion
     public void ShowHide()
     {
+#pragma warning disable CS0618 // El tipo o el miembro están obsoletos
         chatzone.SetActive(!chatzone.active);
+#pragma warning restore CS0618 // El tipo o el miembro están obsoletos
 
     }
     #endregion
