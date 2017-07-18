@@ -42,7 +42,7 @@ public class Singleton_Account : MonoBehaviour
 
     #region Guardar los datos del campeon seleccionado
 
-    public string Char_Name { get; set; }//Vamos a hacerlo con UnaQuery pero ahora la mas completa para obtener  Stats. 
+    public int Char_ID { get; set; } //ID del Character Seleccionado
     
 
     #endregion

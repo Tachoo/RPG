@@ -10,7 +10,6 @@ public class Get_Characters_List : MonoBehaviour {
    
 
     public GameObject SlotCharPref;
-    
     public GameObject CharArea;
     public string[] CharactersInfoList;
     [System.Serializable]
@@ -27,7 +26,9 @@ public class Get_Characters_List : MonoBehaviour {
     public GameObject[] infotochange;
     public GameObject[] Instance;
     public Text [] DataText;
-    
+
+
+    #region Core
     // Use this for initialization
     void Start ()
     {
@@ -39,14 +40,24 @@ public class Get_Characters_List : MonoBehaviour {
 	void Update () {
 		
 	}
-
+    #endregion
     public void SelectCharacter()
     {
-        /*FuckThisShiit Sacamos su nomre y ya despues hacemos una Qry Como estamos en la pc no importa que tentas QeryHagamos internet ilimitado*/
 
+        if (Singleton_Account.instance.Char_ID != 0)
+        {
+            SceneManager.LoadScene(4);// Creacion de nueva partida
+        }
+
+
+    }//Lomansamos a la siguiente scena solo cuando las flags esten  todas clear ! :v
+    public void CreatorMode()
+    {
+        SceneManager.LoadScene(2);// Creacion de nueva partida
     }
 
 
+    #region Database
     IEnumerator CharactersInfo()
     {
 
@@ -73,7 +84,8 @@ public class Get_Characters_List : MonoBehaviour {
 
 
     }
-
+    #endregion
+    #region DataManipulation
     void SettingData()
     {
         int indexoflist = (int)CharactersInfoList.Length / 5;
@@ -89,18 +101,13 @@ public class Get_Characters_List : MonoBehaviour {
             InfoChar.classe = CharactersInfoList[i + 2];
             InfoChar.nivel = CharactersInfoList[i + 3];
             InfoChar.clan = CharactersInfoList[i + 4];
-            
 
-            //Debug.Log("Class" + CharactersInfoList[i+2] );//Probamos
-            //Debug.Log("Nivel" + CharactersInfoList[i+3]);//Probamos
-            //Debug.Log("Clan" + CharactersInfoList[i+4]);//Probamos
             Characters.Add(InfoChar);
         }
         for (int i = 0; i < Characters.Count; i++)
         {
             
             Instantiate(Resources.Load("Slot_Character"), CharArea.transform);
-            // GameObject instance = Instantiate(Resources.Load("Naruto", typeof(GameObject)),transform.position, Quaternion.identity, transform)as GameObject;
         }
         GetALLTag();
         for (int i = 0; i < infotochange.Length; i++)
@@ -112,16 +119,14 @@ public class Get_Characters_List : MonoBehaviour {
 
     }
 
-  
-
     void GetALLTag()
     {
         
         infotochange = GameObject.FindGameObjectsWithTag("DATABASE"); //Asi solo agarramos los objetos que sebo de cambiar
-        //Ya que se llama despues de crearlos pues aqui tambien jalamos los botones
-        //Instance = GameObject.FindGameObjectsWithTag("SLOT");
+       
     }
-     void SetInfo(GameObject Database, CharacterInfo info)
+
+    void SetInfo(GameObject Database, CharacterInfo info)
     {
         DataText = Database.GetComponentsInChildren<Text>();
         
@@ -131,17 +136,9 @@ public class Get_Characters_List : MonoBehaviour {
             DataText[3].text = info.clan;
         
     }
-
-    void Validate(int index)
-    {
-        Text[] CheckInfo;
-        bool[] Flag= new bool[4];
-
-        
-
-       
-    }
-     void UpdateACC()
+    #endregion
+    #region UI&Button
+    void UpdateACC()
     {
         Debug.Log(Instance.Length);
        /*AlaMierda!!! Le paso el boton y despues con el el componente hago que me retorne su padre  o  en general el GameObj y de alli saco lo s componentes de texto*/
@@ -154,22 +151,34 @@ public class Get_Characters_List : MonoBehaviour {
         
 
     }
+
     private void OnUIButtonClick(Button button)
     {
-        //Nombre del boton o de  el objeto en general
-        Debug.Log("Presionado:" + button);
-        Text[] CheckInfo; //Arreglo de Textos
 
-        bool[] Flag = new bool[4]; //Banderas
+       Text[] CheckInfo; //Arreglo de Textos
 
-        CheckInfo=button.gameObject.GetComponentsInChildren<Text>();
-        for (int i = 0; i < CheckInfo.Length; i++)
+       bool[] Flag = new bool[4]; //Banderas
+
+
+
+    CheckInfo=button.gameObject.GetComponentsInChildren<Text>();
+        int _ID=0;
+        for (int i = 0; i <Characters.Count; i++)
         {
+            if ( Characters[i].nombre == CheckInfo[4].text) { Flag[0] = true; _ID = System.Convert.ToInt32(Characters[i].id); } //Sacamos el int
+            if ( Characters[i].classe == CheckInfo[5].text) { Flag[1] = true; }
+            if ( Characters[i].nivel == CheckInfo[6].text  ) { Flag[2] = true; }
+            if ( Characters[i].clan == CheckInfo[7].text ) { Flag[3] = true; }
 
-           // CheckInfo[i]==?
+        }
+        if( Flag[0]& Flag[1]& Flag[2]& Flag[3] == true &&_ID!=0) //Condicion mas extra;a XD
+        {
+            Debug.Log("Terminamos nuestra chamba yeeei");
+            Singleton_Account.instance.Char_ID = System.Convert.ToInt32(_ID);
         }
 
     }
-
+    #endregion
+  
 }
 
